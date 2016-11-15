@@ -3,7 +3,8 @@ import java.io.*;
 public class SaveCSV extends Save{
 	private String[] searches;
 	private Scrape s;
-	String urls[] = {"http://www.hoax-slayer.com/"};
+	//TODO: need to support multiple urls;
+	String urls[] = {"http://play.typeracer.com/"};//
 
 	public SaveCSV(String fileName){
 		this.fileName = fileName;
@@ -17,41 +18,43 @@ public class SaveCSV extends Save{
 		searches = new String[input.length];
  		for(int i = 0; i < input.length; i++)
  			searches[i] = input[i];		        
-        //read these from a file. Probably in the main SAVE class
         s = new Scrape(urls, searches);
 	}
 
-	public void writeFile(){	
+	public void writeFile(){
 		PrintWriter pw = null;
+		StringBuilder sb = new StringBuilder();
+		Map<String, List<String>> l = s.getFound(urls[0]);
 		try{
 			pw = new PrintWriter(new File(fileName));
 		} catch(IOException e){
 			System.err.println("file not found" + fileName);
 		}
-		StringBuilder sb = new StringBuilder();
-		Map<String, List<String>> l = s.getFound(urls[0]);
 
-		//System.out.println(l.get(searches[1])); 
-
-		//I HAVE ABSOLUTLY NO FUCKING IDEA WHY THIS IS WORKNIG THE WAY IT IS
-		for(List<String> li : l.values()){
-			for (int d=0;d<li.size();d++) {
-				for (int k = 0;k<searches.length;k++){	
-					if(d >= l.get(searches[k]).size()) 
-					{
-						sb.append(",");
-						continue;
-					}
-					sb.append(l.get(searches[k]).get(d));
+		for (int d=0;d<getBiggest();d++) {
+			System.out.println(l.size());
+			for (int k = 0;k<searches.length;k++){	
+				if(d >= l.get(searches[k]).size()) 
+				{
 					sb.append(",");
-				}				
-				sb.append("\n");
-			}
-			//break;
+					continue;
+				}
+				sb.append(l.get(searches[k]).get(d));
+				sb.append(",");
+			}				
+			sb.append("\n");
 		}
+
 		pw.write(sb.toString());
 		pw.close();
 	}		
 
-	public void writeFound(){}//probably a uselses method
+	private int getBiggest(){
+		int currentBiggest =0;
+		Map<String, List<String>> l = s.getFound(urls[0]);
+		for (List<String> t : l.values()) {
+			currentBiggest = currentBiggest > t.size() ? currentBiggest : t.size();
+		}
+		return currentBiggest;
+	}
 }

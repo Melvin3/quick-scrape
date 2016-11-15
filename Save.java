@@ -3,7 +3,7 @@ import java.util.*;
 public abstract class Save{
 	protected String fileName;
 	public abstract void writeFile();
-	public abstract void writeFound();
+	
 	public String readFile(){	
 		//will open the file, read the viarables and scrape based on these. 
 		try(BufferedReader br = new BufferedReader(new FileReader(fileName))) {

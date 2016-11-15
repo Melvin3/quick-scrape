@@ -24,9 +24,6 @@ public class Scrape {
 		this.find = find;
 		found = new HashMap<>();
 		getPage();
-		// for (int i = 0;i<found.get(url[0]).size(); i++) {
-		// 	System.out.println(found.get(url[0]).get(i));
-		// }
 	}
 
 
@@ -44,7 +41,7 @@ public class Scrape {
 			try{
 				found.put(u.toString(), searchPage(loadPage(u)));
 			} catch(Exception e){ //needs less general exceptions
-				System.err.println("hello");
+				System.err.println("hello here?" + e.toString());
 			}
 		}
 	}
@@ -83,6 +80,7 @@ public class Scrape {
 				Matcher regexMatcher = regex.matcher(body);
 				while (regexMatcher.find()) {
 					for (int i = 1; i <= regexMatcher.groupCount(); i++) {
+						System.out.println(regexMatcher.group(i));
 						list.add(regexMatcher.group(i));
 					}
 				}
