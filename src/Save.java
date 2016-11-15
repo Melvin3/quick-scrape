@@ -15,8 +15,8 @@ public abstract class Save{
 		    }
 		    String everything = sb.toString();
 			System.out.println(everything);
-		    return everything;//FIXME: make ti beter
-		} catch (IOException e){
+		    return everything;
+		} catch (IOException e){ //make this a better exception
 			System.err.println("Something broke m8" + e.toString());
 		}
 		return null;
