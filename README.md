@@ -4,6 +4,8 @@ just create a csv with each search query seperated by a comma. It fully supports
 
 I've attached an example of scraping youtube's trending section that gets the title, url and view count. This can be seen in the test.csv file. Below is also a screen shot of the output in a spreadsheet program(libre calc) but it should look the same in excel, though I haven't tried it.
 
+urls are read from a file named url.txt(Ill allow for custom named file at a later date) with each url on a new line. 
+
 Example output for the example input:
 
 ![Example output](http://i.imgur.com/0cKAwYg.png)
@@ -11,8 +13,6 @@ Example output for the example input:
 
 # issues
 * if your search query contains a comma, it will break.
-
-* currently have to hard code urls. I'll fix this soonish
 
 * will only work on a new (empty) spread sheet. I want add support to edit existing spreadsheets
 
