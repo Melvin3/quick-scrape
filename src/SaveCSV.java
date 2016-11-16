@@ -5,11 +5,12 @@ public class SaveCSV extends Save{
 	private Scrape s;
 	private StringBuilder sb = new StringBuilder(); 
 	//TODO: need to support multiple urls;
-	String urls[] = {"https://www.youtube.com/feed/trending"};//
+	private String[] urls = super.readFile("urls.txt").split("\\n");//
 
 	public SaveCSV(String fileName){
 		this.fileName = fileName;
 		processCSV();
+		System.out.println(Arrays.toString(urls));
 		for(int i = 0; i<urls.length; i++)
 			writeFile(i);
 	}	
@@ -54,6 +55,7 @@ public class SaveCSV extends Save{
 	private int getBiggest(int urlNum){
 		int currentBiggest =0;
 		Map<String, List<String>> l = s.getFound(urls[urlNum]);
+		System.out.println(l);
 		for (List<String> t : l.values()) {
 			currentBiggest = currentBiggest > t.size() ? currentBiggest : t.size();
 		}

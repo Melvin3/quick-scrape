@@ -21,4 +21,23 @@ public abstract class Save{
 		}
 		return null;
 	}
+
+	public String readFile(String file){	
+		//will open the file, read the viarables and scrape based on these. 
+		try(BufferedReader br = new BufferedReader(new FileReader(file))) {
+		    StringBuilder sb = new StringBuilder();
+		    String line = br.readLine();
+		    while (line != null) {
+		        sb.append(line);
+		        sb.append(System.lineSeparator());
+		        line = br.readLine();
+		    }
+		    String everything = sb.toString();
+			System.out.println(everything);
+		    return everything;
+		} catch (IOException e){ 
+			System.err.println("File not Found " + file + e.toString());
+		}
+		return null;
+	}
 }
